@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./server
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server/public:/app/public
+    depends_on:
+      - ai
+
+  ai:
+    build: ./ai
+    volumes:
+      - ./ai:/app
+
+# Run with: docker-compose up --build
